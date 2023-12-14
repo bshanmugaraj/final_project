@@ -14,7 +14,7 @@ node {
             string(name: 'prod_example_com', defaultValue: '50', description: 'Target Record')
             string(name: 'nonprod_example_com', defaultValue: '50', description: 'Target Record')
         }
-        stage('Update file') {
+        stage('Update Weight') {
             def SERVICE_NAME = params.SERVICE
             sh '''
 #!/bin/bash
@@ -81,6 +81,26 @@ fi
 '''
             
       }
+        stage('Plan') {
+            // Enforce a 5 min timeout on init. TF init has a tendency to hang trying to download the aws provider plugin.
+            timeout(5) {
+                // init the configured s3 backend
+                sh "terraform init -backend=true"
+            }
+            // get the current remote state:
+            sh "terraform get"
+            
+            // run a plan, save its output in a file, exit with detailed 0,1,2 codes
+            sh "set +e; terraform plan -out=plan.out -detailed-exitcode; echo \$? > status"
+            def exitCode = readFile('status').trim()
+            echo "Terraform Plan Exit Code: ${exitCode}"
+        }
+        stage('Approval') {
+            // Manual approval step
+            input 'Proceed with Terraform apply?'
+        }
+
+        
         stage('Commit GIT') {
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
             withCredentials([sshUserPrivateKey(credentialsId: 'eeadb089-6f96-412c-96f8-0e7b2f348d49', keyFileVariable: 'jenkins')]) {
