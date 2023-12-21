@@ -1,14 +1,6 @@
-resource "vinyldns_record_set" "commercedataservice-rr" {
-  name         = "commercedataservice-rr"
-  zone_id      = var.denis_zone_id["com"]
-  type         = "CNAME"
-  ttl          = 60
-  record_cname = "commercedataservice-rr.r53.test.com."
-
-  lifecycle {
-    prevent_destroy = true
+resource "aws_route53_zone" "primary" {
+    name = "example.com"
   }
-}
 
 resource "aws_route53_record" "commercedataservice-rr-as2-on-prem" {
 zone_id = data.aws_route53_zone.r53-example-com.zone_id
