@@ -3,7 +3,7 @@ resource "aws_route53_zone" "primary" {
   }
 
 resource "aws_route53_record" "commercedataservice-rr-as2-on-prem" {
-zone_id = data.aws_route53_zone.r53-example-com.zone_id
+zone_id = aws_route53_zone.primary.zone_id
 name    = "commercedataservice-rr"
 type    = "CNAME"
 ttl     = "60"
@@ -23,7 +23,7 @@ prevent_destroy = true
 }
 
 resource "aws_route53_record" "commercedataservice-rr-ch2-on-prem" {
-zone_id = data.aws_route53_zone.r53-example-com.zone_id
+zone_id = aws_route53_zone.primary.zone_id
 name    = "commercedataservice-rr"
 type    = "CNAME"
 ttl     = "60"
@@ -43,7 +43,7 @@ prevent_destroy = true
 }
 
 resource "aws_route53_record" "commercedataservice-rr-ho2-on-prem" {
-zone_id = data.aws_route53_zone.r53-example-com.zone_id
+zone_id = aws_route53_zone.primary.zone_id
 name    = "commercedataservice-rr"
 type    = "CNAME"
 ttl     = "60"
@@ -63,7 +63,7 @@ prevent_destroy = true
 }
 
 resource "aws_route53_record" "commercedataservice-rr-us-west-2a" {
-  zone_id = data.aws_route53_zone.r53-example-com.zone_id
+  zone_id = aws_route53_zone.primary.zone_id
   name    = "commercedataservice-rr"
   type    = "CNAME"
   ttl     = "60"
@@ -85,7 +85,7 @@ resource "aws_route53_record" "commercedataservice-rr-us-west-2a" {
 }
 
 resource "aws_route53_record" "commercedataservice-rr-us-east-1-eks" {
-  zone_id = data.aws_route53_zone.r53-example-com.zone_id
+  zone_id = aws_route53_zone.primary.zone_id
   name    = "commercedataservice-rr"
   type    = "CNAME"
   ttl     = "60"
