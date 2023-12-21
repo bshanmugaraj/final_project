@@ -5,7 +5,7 @@ type    = "CNAME"
 ttl     = "60"
 
 weighted_routing_policy {
-weight = 22
+weight = 12
 }
 
 set_identifier = "commercedataservice-rr-as2-on-prem"
@@ -23,7 +23,7 @@ type    = "CNAME"
 ttl     = "60"
 
 weighted_routing_policy {
-weight = 11
+weight = 12
 }
 
 set_identifier = "commercedataservice-rr-ch2-on-prem"
@@ -41,7 +41,7 @@ type    = "CNAME"
 ttl     = "60"
 
 weighted_routing_policy {
-weight = 34
+weight = 12
 }
 
 set_identifier = "commercedataservice-rr-ho2-on-prem"
@@ -59,7 +59,7 @@ resource "aws_route53_record" "commercedataservice-rr-us-west-2a" {
   ttl     = "60"
 
   weighted_routing_policy {
-    weight = 0
+    weight = 12
   }
 
   set_identifier = "commercedataservice-rr-us-west-2a"
@@ -80,7 +80,7 @@ resource "aws_route53_record" "commercedataservice-rr-us-east-1-eks" {
   ttl     = "60"
 
   weighted_routing_policy {
-    weight = 0
+    weight = 12
   }
 
   set_identifier = "commercedataservice-rr-us-east-1-eks"
