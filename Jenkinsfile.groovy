@@ -118,7 +118,7 @@ fi
             sh "git config user.name bshanmugaraj"
             sh "git add ."
             sh "git commit -m 'Commited on Traffic shaping triggered Build: ${env.BUILD_NUMBER}'"
-            sh "git push git@github.com:bshanmugaraj/final_project.git HEAD:master"     
+            sh "git push git@github.com:bshanmugaraj/final_project.git HEAD:testone"     
             }
         }
      }
