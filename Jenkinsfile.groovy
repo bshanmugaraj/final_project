@@ -14,81 +14,73 @@ node {
             string(name: 'prod_fo_ho2', defaultValue: '', description: 'Target Record')
             string(name: 'prod_fo_us_east_1', defaultValue: '', description: 'Target Record')
             string(name: 'commercedataservice_prod_fo_us_west_2a', defaultValue: '', description: 'Target Record')
-        }
+        }}
         stage('Update Weight') {
             def SERVICE_NAME = params.SERVICE
             sh '''
-#!/bin/bash
-update_file (){
-    local file_path="$1"
-    local target_string="$2"
-    local new_weight="$3"
-    local service="$4"
+                #!/bin/bash
+                update_file (){
+                    local file_path="$1"
+                    local target_string="$2"
+                    local new_weight="$3"
+                    local service="$4"
 
-# Search for the target string and its associated weight
-    while IFS= read -r line; do
-        if [[ "$line" == *"$target_string"* ]]; then
-            # If the target string is found, find the weight in the previous lines
-            #echo $line
-            line_number=$(grep -n "$target_string" "$file_path" | cut -d: -f1)
-            #line_number=$(awk '/'^$target_string'/ { print NR }' $file_path)
-            #echo $line_number
-            while [ "$line_number" -gt 1 ]; do
-                line_number=$((line_number - 1))
-                previous_line=$(sed -n "${line_number}p" "$file_path")
-                #echo $previous_line
-                if [[ "$previous_line" == *weight* ]]; then
-                    #echo $previous_line
-                    #echo $line_number
-                    # Extract the current weight value
-                    current_weight=$(echo "$previous_line" | grep -o '[[:digit:]]*')
-                    # Update the weight value (replace 'new_weight' with the desired value)
-                    #update_weight "$file_path" "$line_number" "$new_weight" $current_weight
-                    sed -i -e "${line_number}s/${current_weight}/${new_weight}/1" "$file_path"
+                    # Search for the target string and its associated weight
+                    while IFS= read -r line; do
+                        if [[ "$line" == *"$target_string"* ]]; then
+                            # If the target string is found, find the weight in the previous lines
+                            #echo $line
+                            line_number=$(grep -n "$target_string" "$file_path" | cut -d: -f1)
+                            while [ "$line_number" -gt 1 ]; do
+                                line_number=$((line_number - 1))
+                                previous_line=$(sed -n "${line_number}p" "$file_path")
+                                if [[ "$previous_line" == *weight* ]]; then
+                                    current_weight=$(echo "$previous_line" | grep -o '[[:digit:]]*')
+                                    sed -i -e "${line_number}s/${current_weight}/${new_weight}/1" "$file_path"
 
-                    echo "Weight updated from $current_weight to $new_weight in $service $target_string"
-                    break
-                fi
-            done
-        fi
-    done < "$file_path"
-}
+                                    echo "Weight updated from $current_weight to $new_weight in $service $target_string"
+                                    break
+                                fi
+                            done
+                        fi
+                    done < "$file_path"
+            }
 
-if [ ! -z ${prod_fo_as2} ]; then
-  target_string="prod-fo-as2.test.com"
-  new_weight="${prod_fo_as2}"
-  #echo $new_weight
-  update_file "${SERVICE}-rr.tf" $target_string $new_weight $SERVICE
-fi
+            if [ ! -z ${prod_fo_as2} ]; then
+                target_string="prod-fo-as2.test.com"
+                new_weight="${prod_fo_as2}"
+                #echo $new_weight
+                update_file "${SERVICE}-rr.tf" $target_string $new_weight $SERVICE
+            fi
 
-if [ ! -z ${prod_fo_ch2} ]; then
-  target_string="prod-fo-ch2.test.com"
-  new_weight="${prod_fo_ch2}"
-  #echo $new_weight
-  update_file "${SERVICE}-rr.tf" $target_string $new_weight $SERVICE
-fi
+            if [ ! -z ${prod_fo_ch2} ]; then
+                target_string="prod-fo-ch2.test.com"
+                new_weight="${prod_fo_ch2}"
+                #echo $new_weight
+                update_file "${SERVICE}-rr.tf" $target_string $new_weight $SERVICE
+            fi
 
-if [ ! -z ${prod_fo_ho2} ]; then
-  target_string="prod-fo-ho2.test.com"
-  new_weight="${prod_fo_ho2}"
-  #echo $new_weight
-  update_file "${SERVICE}-rr.tf" $target_string $new_weight $SERVICE
-fi
+            if [ ! -z ${prod_fo_ho2} ]; then
+                target_string="prod-fo-ho2.test.com"
+                new_weight="${prod_fo_ho2}"
+                #echo $new_weight
+                update_file "${SERVICE}-rr.tf" $target_string $new_weight $SERVICE
+            fi
 
-if [ ! -z ${prod_fo_us_east_1} ]; then
-  target_string="prod-fo-us-east-1.test.com"
-  new_weight="${prod_fo_us_east_1}"
-  #echo $new_weight
-  update_file "${SERVICE}-rr.tf" $target_string $new_weight $SERVICE
-fi
+            if [ ! -z ${prod_fo_us_east_1} ]; then
+                target_string="prod-fo-us-east-1.test.com"
+                new_weight="${prod_fo_us_east_1}"
+                #echo $new_weight
+                update_file "${SERVICE}-rr.tf" $target_string $new_weight $SERVICE
+            fi
 
-if [ ! -z ${commercedataservice_prod_fo_us_west_2a} ]; then
-  target_string="commercedataservice-prod-fo-us-west-2a.r53.test.com"
-  new_weight="${commercedataservice_prod_fo_us_west_2a}"
-  #echo $new_weight
-  update_file "${SERVICE}-rr.tf" $target_string $new_weight $SERVICE
-fi
-'''
+            if [ ! -z ${commercedataservice_prod_fo_us_west_2a} ]; then
+                target_string="commercedataservice-prod-fo-us-west-2a.r53.test.com"
+                new_weight="${commercedataservice_prod_fo_us_west_2a}"
+                #echo $new_weight
+                update_file "${SERVICE}-rr.tf" $target_string $new_weight $SERVICE
+            fi
+            '''
             
       }
         stage('Plan') {
@@ -122,6 +114,5 @@ fi
             }
         }
      }
-  }
+  
 }
-    
