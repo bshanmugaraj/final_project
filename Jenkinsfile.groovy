@@ -58,35 +58,35 @@ if [ ! -z ${prod_fo_as2} ]; then
   target_string="prod-fo-as2.test.com"
   new_weight="${prod_fo_as2}"
   #echo $new_weight
-  update_file "/Users/nbc404/Documents/sourcecode/test3/${SERVICE}-rr.tf" $target_string $new_weight $SERVICE
+  update_file "${SERVICE}-rr.tf" $target_string $new_weight $SERVICE
 fi
 
 if [ ! -z ${prod_fo_ch2} ]; then
   target_string="prod-fo-ch2.test.com"
   new_weight="${prod_fo_ch2}"
   #echo $new_weight
-  update_file "/Users/nbc404/Documents/sourcecode/test3/${SERVICE}-rr.tf" $target_string $new_weight $SERVICE
+  update_file "${SERVICE}-rr.tf" $target_string $new_weight $SERVICE
 fi
 
 if [ ! -z ${prod_fo_ho2} ]; then
   target_string="prod-fo-ho2.test.com"
   new_weight="${prod_fo_ho2}"
   #echo $new_weight
-  update_file "/Users/nbc404/Documents/sourcecode/test3/${SERVICE}-rr.tf" $target_string $new_weight $SERVICE
+  update_file "${SERVICE}-rr.tf" $target_string $new_weight $SERVICE
 fi
 
 if [ ! -z ${prod_fo_us_east_1} ]; then
   target_string="prod-fo-us-east-1.test.com"
   new_weight="${prod_fo_us_east_1}"
   #echo $new_weight
-  update_file "/Users/nbc404/Documents/sourcecode/test3/${SERVICE}-rr.tf" $target_string $new_weight $SERVICE
+  update_file "${SERVICE}-rr.tf" $target_string $new_weight $SERVICE
 fi
 
 if [ ! -z ${commercedataservice_prod_fo_us_west_2a} ]; then
   target_string="commercedataservice-prod-fo-us-west-2a.r53.test.com"
   new_weight="${commercedataservice_prod_fo_us_west_2a}"
   #echo $new_weight
-  update_file "/Users/nbc404/Documents/sourcecode/test3/${SERVICE}-rr.tf" $target_string $new_weight $SERVICE
+  update_file "${SERVICE}-rr.tf" $target_string $new_weight $SERVICE
 fi
 '''
             
