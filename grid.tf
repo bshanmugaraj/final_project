@@ -11,7 +11,7 @@ resource "aws_route53_record" "grid-us-west-2a" {
   ttl     = 5
 
   weighted_routing_policy {
-    weight = 200
+    weight = 100
   }
 
   set_identifier = "grid-us-west-2a"
@@ -25,7 +25,7 @@ resource "aws_route53_record" "grid-us-east-1" {
   ttl     = 5
 
   weighted_routing_policy {
-    weight = 100
+    weight = 90
   }
 
   set_identifier = "grid-us-east-1"
