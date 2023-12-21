@@ -1,5 +1,5 @@
 resource "aws_route53_zone" "primary" {
-    name = "example.com"
+    name = "test.com"
   }
 
 resource "aws_route53_record" "commercedataservice-rr-as2-on-prem" {
