@@ -108,8 +108,9 @@ node {
             withCredentials([sshUserPrivateKey(credentialsId: 'eeadb089-6f96-412c-96f8-0e7b2f348d49', keyFileVariable: 'jenkins')]) {
             sh "git config user.email shanmugarajb.97@gmail.com"
             sh "git config user.name bshanmugaraj"
+            sh "git pull git@github.com:bshanmugaraj/final_project.git HEAD:testone"
             sh "git add ."
-            sh "git commit -m 'Commited on Traffic shaping triggered Build: ${env.BUILD_NUMBER}'"
+            sh "git commit -m 'Commited on Traffic shaping triggered Build: ${env.BUILD_NUMBER}'"   
             sh "git push git@github.com:bshanmugaraj/final_project.git HEAD:testone"     
             }
         }
