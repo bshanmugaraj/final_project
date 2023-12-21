@@ -5,7 +5,7 @@ type    = "CNAME"
 ttl     = "60"
 
 weighted_routing_policy {
-weight = 12
+weight = 0
 }
 
 set_identifier = "commercedataservice-rr-as2-on-prem"
@@ -23,7 +23,7 @@ type    = "CNAME"
 ttl     = "60"
 
 weighted_routing_policy {
-weight = 12
+weight = 33
 }
 
 set_identifier = "commercedataservice-rr-ch2-on-prem"
@@ -41,7 +41,7 @@ type    = "CNAME"
 ttl     = "60"
 
 weighted_routing_policy {
-weight = 12
+weight = 33
 }
 
 set_identifier = "commercedataservice-rr-ho2-on-prem"
