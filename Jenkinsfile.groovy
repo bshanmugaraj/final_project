@@ -14,7 +14,7 @@ node {
             string(name: 'prod_fo_ho2', defaultValue: '', description: 'Target Record')
             string(name: 'prod_fo_us_east_1', defaultValue: '', description: 'Target Record')
             string(name: 'commercedataservice_prod_fo_us_west_2a', defaultValue: '', description: 'Target Record')
-        }}
+        }
         stage('Update Weight') {
             def SERVICE_NAME = params.SERVICE
             sh '''
@@ -114,5 +114,5 @@ node {
             }
         }
      }
-  
+   }
 }
