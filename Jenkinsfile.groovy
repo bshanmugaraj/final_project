@@ -13,7 +13,7 @@ node {
             string(name: 'prod_fo_ch2', defaultValue: '', description: 'Target Record')
             string(name: 'prod_fo_ho2', defaultValue: '', description: 'Target Record')
             string(name: 'prod_fo_us_east_1', defaultValue: '', description: 'Target Record')
-            string(name: 'commercedataservice_prod_fo_us_west_2a', defaultValue: '', description: 'Target Record')
+            string(name: 'prod_fo_us_west_2a', defaultValue: '', description: 'Target Record')
         }
         stage('Update Weight') {
             def SERVICE_NAME = params.SERVICE
@@ -74,9 +74,9 @@ node {
                 update_file "${SERVICE}-rr.tf" $target_string $new_weight $SERVICE
             fi
 
-            if [ ! -z ${commercedataservice_prod_fo_us_west_2a} ]; then
-                target_string="commercedataservice-prod-fo-us-west-2a.r53.test.com"
-                new_weight="${commercedataservice_prod_fo_us_west_2a}"
+            if [ ! -z ${prod_fo_us_west_2a} ]; then
+                target_string="${SERVICE}-prod-fo-us-west-2a.r53.test.com"
+                new_weight="${prod_fo_us_west_2a}"
                 #echo $new_weight
                 update_file "${SERVICE}-rr.tf" $target_string $new_weight $SERVICE
             fi
